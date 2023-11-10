@@ -1,12 +1,16 @@
 import { useContext } from "react"
 import { UserContext } from "../App.js"
+import { useNavigate } from "react-router-dom"
 
 
 export default function Login(){
     const {token, setToken, loggedin, setLoggedin} = useContext(UserContext)
+    const nav = useNavigate()
+  
 
     const handleLogin = (token) => {
         setToken(token.token)
+        // setLoggedin(true)
         localStorage.setItem('token', setLoggedin(true))
     }
 
@@ -26,6 +30,8 @@ export default function Login(){
             .then(res => res.json())
             .then(handleLogin)
             .catch(console.error)
+
+        nav('/recipes')
     }
     return(
         <>

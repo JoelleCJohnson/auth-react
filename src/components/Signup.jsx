@@ -46,6 +46,8 @@ export default function Signup() {
                 <br />
                 <button type="submit">Sign up</button>
             </form>
+            <h2>Already have an account?</h2>
+            <button onClick={() => nav('/login')}>Log in here!</button>
         </>
     )
 }

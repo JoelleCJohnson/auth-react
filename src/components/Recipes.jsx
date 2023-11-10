@@ -4,7 +4,7 @@ import { UserContext } from "../App"
 
 export default function Recipes() {
     const [recipes, setRecipes] = useState([])
-    const {token} = useContext(UserContext)
+    const { token } = useContext(UserContext)
 
 
     useEffect(() => {
@@ -53,10 +53,13 @@ export default function Recipes() {
             {recipes ?
                 recipes?.map(recipe => {
                     return (
-                        <h2>{recipe.title}</h2>
+                        <div className="container">
+                            <h2>{recipe.title}</h2>
+                            <p>{recipe.recipe}</p>
+                        </div>
                     )
                 })
-            :
+                :
                 "Loading..."
             }
         </>
