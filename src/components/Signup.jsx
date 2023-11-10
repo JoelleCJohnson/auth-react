@@ -1,8 +1,15 @@
+import { useNavigate } from "react-router-dom"
 import { UserContext } from "../App.js"
 import { useContext } from "react"
 
 export default function Signup() {
     const { token, setToken, loggedin, setLoggedin } = useContext(UserContext)
+    const nav = useNavigate()
+
+    const handleSignup = (token) => {
+        setToken(token.token)
+        localStorage.setItem('login', setLoggedin(true))
+    }
 
     const handleFormSubmit = (e) => {
         e.preventDefault()
@@ -18,21 +25,23 @@ export default function Signup() {
             body: JSON.stringify(formData)
         })
             .then(res => res.json())
-            .then(token => setToken(token.token))
+            .then(handleSignup)
             .catch(console.error)
+            nav('/')
     }
 
     return (
         <>
             <form onSubmit={handleFormSubmit}>
+                <h2>Sign up</h2>
                 <label htmlFor="email">
                     Email:
-                    <input type="text" name="email" />
+                    <input type="email" name="email" />
                 </label>
                 <br />
                 <label htmlFor="password">
                     Password
-                    <input type="text" name="password" />
+                    <input type="password" name="password" />
                 </label>
                 <br />
                 <button type="submit">Sign up</button>

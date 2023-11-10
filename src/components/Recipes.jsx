@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
+import { UserContext } from "../App"
 
 
 export default function Recipes() {
-    const [recipes, setRecipes] = useState()
+    const [recipes, setRecipes] = useState([])
+    const {token} = useContext(UserContext)
 
 
     useEffect(() => {
@@ -22,7 +24,7 @@ export default function Recipes() {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                // Authorization: token,
+                Authorization: token,
             },
             body: JSON.stringify(formData)
         })
@@ -49,7 +51,7 @@ export default function Recipes() {
                 <button type="submit">Add Recipe!</button>
             </form>
             {recipes ?
-                recipes.map(recipe => {
+                recipes?.map(recipe => {
                     return (
                         <h2>{recipe.title}</h2>
                     )
